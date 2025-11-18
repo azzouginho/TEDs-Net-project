@@ -24,7 +24,8 @@ class MNIST_dataclass(Dataset):
             # Seperate into labels and images:
             Y_class= np.array([x[1] for x in mnist_set]) # y class
             Y_set = np.array([np.array(x[0]) for x in mnist_set]) # labels
-            self.Y_set =Y_set[np.where(Y_class ==0)[0]]  # only want 0s
+            # self.Y_set =Y_set[np.where(Y_class ==0)[0]]  # only want 0s
+            self.Y_set =Y_set
             # Divide into Validation and Train:
             N = len(self.Y_set)
             t =int(N*0.1) 
@@ -41,7 +42,8 @@ class MNIST_dataclass(Dataset):
             mnist_set = torchvision.datasets.MNIST(root=params.data_path, train=False, download=True, transform=None)
             Y_class= np.array([x[1] for x in mnist_set]) # y class
             X_set = np.array([np.array(x[0]) for x in mnist_set]) # labels
-            self.X_set =X_set[np.where(Y_class ==0)[0]] # Onlt choose 0s
+            # self.X_set =X_set[np.where(Y_class ==0)[0]] # Onlt choose 0s
+            self.X_set =X_set
             self.Y_set = self.X_set
 
         self.Y_set[self.Y_set>1] =1

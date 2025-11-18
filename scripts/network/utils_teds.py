@@ -301,7 +301,12 @@ class GaussianSmoothing(nn.Module):
         """
         # if static or trainable:
         if self.learnable == 1:
-            return self.conv(input)
+            w = self.conv.weight
+            w_abs = torch.abs(w)
+            spatial_dims = list(range(2, w.ndim)) 
+            w_sum = torch.sum(w_abs, dim=spatial_dims, keepdim=True) + 1e-8 # +epsilon pour éviter division par 0
+            w_constrained = w_abs / w_sum
+            return self.conv(input, weight=w_constrained, groups=self.groups, padding=self.pad)
         else:
             return self.conv(input, weight=self.weight, groups=self.groups,padding=self.pad)
 
@@ -344,6 +349,4 @@ def WarpPriorShape(self, prior_shape, disp_field):
     disp_prior_shape = self.transformer(prior_shape, disp_field)
 
     return disp_prior_shape
-
-
 

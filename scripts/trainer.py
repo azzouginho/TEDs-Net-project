@@ -28,6 +28,7 @@ class Trainer:
 
     def dothetraining(self):
         
+        best_val_loss = float('inf')
         # Loop through epochs:
         for epoch in range(self.params.epoch):
 
@@ -59,6 +60,12 @@ class Trainer:
             # Print out losses
             print("[{0}] {1}: {2:.6f}".format(epoch, 'training_loss', train_loss))
             print("[{0}] {1}: {2:.6f}".format(epoch, 'validation_loss', val_loss))
+            
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                save_path = 'best_model.pth'
+                torch.save(self.net.state_dict(), save_path)
+                print(f"   --> Modèle sauvegardé : {save_path}")
 
     def do_validation(self,epoch):
         """ Perform the validation on each batch:
