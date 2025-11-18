@@ -34,6 +34,8 @@ class Train_Runner:
             from parameters.mnist_parameters import Parameters
         elif args.dataset=="ACDC":
             from parameters.acdc_parameters import Parameters
+        elif args.dataset=="heart":
+            from parameters.heart_parameters import Parameters
 
         self.params = Parameters.from_dict({'data':args.dataset})
 
@@ -51,8 +53,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--dataset', 
                         help = 'Which dataset we are using',
-                        choices=['ACDC','mnist'],
-                        default='mnist')
+                        choices=['ACDC','mnist','heart'],
+                        default='heart')
 
     args = parser.parse_args()
 

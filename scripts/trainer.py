@@ -95,6 +95,8 @@ class Trainer:
             from dataloaders.setup import setup_mnist_dataloader as setup_dataloader
         elif self.params.data=="ACDC":
             from dataloaders.setup import setup_acdc_dataloader as setup_dataloader
+        elif self.params.data=="heart":
+            from dataloaders.setup import setup_heart_dataloader as setup_dataloader
 
         self.dataloader_dic = setup_dataloader(self.params,['train','validation','test'])
 

@@ -79,15 +79,14 @@ class Parameters:
     threshold: float = 0.3
 
     # Loss Parameters:
-    loss_params:  LossParams = LossParams()
-
+    loss_params: LossParams = field(default_factory=LossParams)
     # Network Hyper Parameters:
-    network_params: GeneralNet = GeneralNet()
+    network_params: GeneralNet = field(default_factory=GeneralNet)
 
     # Dataset
     data: str='ACDC'
-    dataset: ACDC_dataset = ACDC_dataset()
+    dataset: ACDC_dataset = field(default_factory=ACDC_dataset)
     net: str='teds'
-    network: TEDS_Arch = TEDS_Arch()
+    network: TEDS_Arch = field(default_factory=TEDS_Arch)
 
 
