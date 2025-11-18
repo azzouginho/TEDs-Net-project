@@ -78,15 +78,15 @@ class Parameters:
     data_path: str="tmp"
 
     # Loss Parameters:
-    loss_params:  LossParams = LossParams()
+    loss_params: LossParams = field(default_factory=LossParams)
 
     # Network Hyper Parameters:
-    network_params: GeneralNet = GeneralNet()
+    network_params: GeneralNet = field(default_factory=GeneralNet)
 
     # Default version of network and data selection:
-    net: str='teds'
-    network: TEDS_Arch = TEDS_Arch()
-    data: str='mnist'
-    dataset: MNIST_dataset = MNIST_dataset()
+    net: str = 'teds'
+    network: TEDS_Arch = field(default_factory=TEDS_Arch)
+    data: str = 'mnist'
+    dataset: MNIST_dataset = field(default_factory=MNIST_dataset)
     
 
