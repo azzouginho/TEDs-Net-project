@@ -106,7 +106,7 @@ class Trainer:
             if loss_function=="dice":
                 curr_loss = dice_loss().loss(labels,output[i],loss_mult=w)
             elif "grad" in loss_function:
-                curr_loss = grad_loss(self.params).loss(labels,output[i],loss_mult=w)
+                curr_loss = grad_loss(self.params, self.device).loss(labels,output[i],loss_mult=w)
       
             # Combine our loss functions
             loss += curr_loss

@@ -33,10 +33,11 @@ class grad_loss:
     Adapted from: https://github.com/voxelmorph/voxelmorph
     """
 
-    def __init__(self,params,penalty='l2'):
+    def __init__(self,params,device,penalty='l2'):
 
         self.penalty=penalty
         self.ndims = params.dataset.ndims
+        self.device = device
 
     def loss(self,_,y_pred,loss_mult=None):
         
@@ -48,9 +49,9 @@ class grad_loss:
         vectors = [torch.linspace(-1, 1, s) for s in size]
         grids = torch.meshgrid(vectors)
         grid = torch.stack(grids)
-        grid = grid.to('cuda:0')
+        grid = grid.to(self.device)
 
-        flow_feild = torch.zeros(y_pred.size(),device='cuda:0')
+        flow_feild = torch.zeros(y_pred.size(),device=self.device)
         for i in range(y_pred.size()[0]):
             flow_feild[i] = y_pred[i] +grid
 

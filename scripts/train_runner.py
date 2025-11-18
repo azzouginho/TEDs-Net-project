@@ -10,15 +10,15 @@ class Train_Runner:
         self.setup_params(args)
 
         # 2) Setup Device ----------- :
-        device = torch.device("cpu" if not torch.cuda.is_available() else "cuda:0")
+        self.device = torch.device("cpu" if not torch.cuda.is_available() else "cuda:0")
 
         # 3) Load in Model ----------- :
         from network.TEDS_Net import TEDS_Net as net
         net = net(self.params)
-        net.to(device)
+        net.to(self.device)
 
         # 4) Train and Evalte the Model ---------- :
-        trainer = Trainer(self.params, device, net)
+        trainer = Trainer(self.params, self.device, net)
         trainer.dothetraining()
         trainer.do_evalutation()
 
